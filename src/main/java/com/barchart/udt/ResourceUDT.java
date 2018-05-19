@@ -35,7 +35,7 @@ public final class ResourceUDT {
 	 * extracted from this library jar;
 	 */
 	public static final String DEFAULT_LIBRARY_EXTRACT_LOCATION = //
-			"C:\\Users\\Raman\\Desktop\\workspace\\barchart-udt-core\\bin";
+			"bin";
 
 	/** */
 	public static final String DEFAULT_LIBRARY_LOADER_CLASS = //

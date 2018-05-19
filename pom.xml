@@ -12,7 +12,7 @@
 	
 	<groupId>org.barchart.udt</groupId>
 	<version>1.0.0-SNAPSHOT</version>	
-	<artifactId>barchart-udt-core</artifactId>
+	<artifactId>File_Transfer_UDT</artifactId>
 	<packaging>jar</packaging>
 
 	<properties>
