@@ -19,6 +19,8 @@ import java.net.URLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.file.transfer.udt.util.NativeUtils;
+
 /**
  * class path resource extractor and system loader
  */
@@ -165,14 +167,45 @@ public class ResourceManagerUDT {
 	/**
 	 * load library using absolute file path
 	 */
+
 	protected static void systemLoad(final String targetPath) throws Exception {
 
 		final File loadFile = new File(targetPath);
 
 		final String loadPath = loadFile.getAbsolutePath();
+		// final String loadPath = System.getProperty("user.dir") + "/"
+		// + loadFile.getPath();
 
 		System.load(loadPath);
 
+	}
+
+	/**
+	 * load library using absolute file path
+	 */
+	protected static void systemLoadFromJar(final String targetPath)
+			throws Exception {
+
+		final String osName = System.getProperty("os.name").toLowerCase();
+		log.debug("operating system {}", osName);
+		final File loadFile = new File(targetPath);
+		log.debug("Win {}", osName.indexOf("win"));
+		log.debug("Linux {}", osName.indexOf("lin"));
+		if (osName.indexOf("win") >= 0) {
+			log.debug("in windows...");
+			final String loadPath = "\\" + loadFile.getPath();
+			NativeUtils.loadLibraryFromJarWindows(loadPath);
+		} else if (osName.indexOf("lin") >= 0 || osName.indexOf("mac") >= 0) {
+			String loadPath = loadFile.getPath();
+			final int slashIndex = loadPath.indexOf("/");
+			log.debug("Slash index {} " + slashIndex);
+			if (slashIndex > 0) {
+				loadPath = "/" + loadPath;
+			}
+			NativeUtils.loadLibraryFromJarLinux(loadPath);
+		} else if (osName.indexOf("sunos") >= 0) {
+			// NativeUtils.loadLibraryFromJarSolaris(loadPath);
+		}
 	}
 
 	/**

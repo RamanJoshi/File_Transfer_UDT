@@ -80,17 +80,26 @@ public class LibraryLoaderUDT implements LibraryLoader {
 			final String targetFolder) throws Exception {
 
 		/** extract all libraries or fail */
-		for (final String sourcePath : sourceList) {
-			final String targetPath = targetFolder + sourcePath;
-			// ResourceManagerUDT.extractResource(sourcePath, targetPath);
-		}
+		// for (final String sourcePath : sourceList) {
+		// final String targetPath = targetFolder + sourcePath;
+		// log.debug("Source path {}, target path {}",sourcePath,targetPath);
+		// //ResourceManagerUDT.extractResource(sourcePath, targetPath);
+		// }
 
 		/** try to load only if all are extracted */
-		for (final String sourcePath : sourceList) {
-			final String targetPath = targetFolder + sourcePath;
-			ResourceManagerUDT.systemLoad(targetPath);
-		}
 
+		if (this.getClass().getResource("LibraryLoaderUDT.class").toString()
+				.startsWith("jar")) {
+			for (final String sourcePath : sourceList) {
+				final String targetPath = targetFolder + sourcePath;
+				ResourceManagerUDT.systemLoadFromJar(targetPath);
+			}
+		} else {
+			for (final String sourcePath : sourceList) {
+				final String targetPath = targetFolder + sourcePath;
+				ResourceManagerUDT.systemLoadFromJar(targetPath);
+			}
+		}
 	}
 
 	/** try to load from JAR class path library */
