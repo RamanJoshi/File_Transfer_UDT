@@ -185,7 +185,7 @@ public class MonitorUDT {
 	/**
 	 * number of received ACK packets
 	 */
-	protected volatile int pktRecvACK;
+	public volatile int pktRecvACK;
 
 	public int localReceivedAck() {
 		return pktRecvACK;
@@ -203,7 +203,7 @@ public class MonitorUDT {
 	/**
 	 * number of received NAK packets
 	 */
-	protected volatile int pktRecvNAK;
+	public volatile int pktRecvNAK;
 
 	public int localReceivedNak() {
 		return pktRecvNAK;
@@ -212,7 +212,7 @@ public class MonitorUDT {
 	/**
 	 * sending rate in Mb/s
 	 */
-	protected volatile double mbpsSendRate;
+	public volatile double mbpsSendRate;
 
 	public double mbpsSendRate() {
 		return mbpsSendRate;
@@ -241,7 +241,7 @@ public class MonitorUDT {
 	/**
 	 * packet sending period, in microseconds
 	 */
-	protected volatile double usPktSndPeriod;
+	public volatile double usPktSndPeriod;
 
 	public double currentSendPeriod() {
 		return usPktSndPeriod;
@@ -259,7 +259,7 @@ public class MonitorUDT {
 	/**
 	 * congestion window size, in number of packets
 	 */
-	protected volatile int pktCongestionWindow;
+	public volatile int pktCongestionWindow;
 
 	public int currentCongestionWindow() {
 		return pktCongestionWindow;
@@ -277,7 +277,7 @@ public class MonitorUDT {
 	/**
 	 * RTT, in milliseconds
 	 */
-	protected volatile double msRTT;
+	public volatile double msRTT;
 
 	public double currentMillisRTT() {
 		return msRTT;

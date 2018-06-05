@@ -26,9 +26,9 @@ public class AppClient {
 	static boolean finished = false;
 	private static final long start = System.currentTimeMillis();
 	private static int count = 0;
-	private static final String sourceFile = "G:\\series\\Homeland\\Season 6\\Homeland.S06E02.720p.HDTV.x264-AVS[eztv].mkv[eztv]\\Homeland.S06E02.720p.HDTV.x264-AVS[eztv].mkv";
-	private static final String targetFile = "Homeland.S06E02.720p.HDTV.x264-AVS[eztv].mkv";
-	private final static double maxBW = 300 * 0.93;
+	private static final String sourceFile = "H:\\New movie\\Avatar 3d (2009) [1080p] [HSBS] [3d]\\Avatar 3d (2009) HSBS BrRip x264 - YFIY.mp4";
+	private static final String targetFile = "Avatar 3d (2009) HSBS BrRip x264 - YFIY123.mp4";
+	private final static double maxBW = 3000 * 0.93;
 
 	/**
 	 * @param args
@@ -36,7 +36,7 @@ public class AppClient {
 	 */
 	public static void main(final String[] args) {
 
-		final String host = "192.168.0.104";
+		final String host = "192.168.0.108";
 		final int port = 9000;
 		final int size = 10000;
 		final byte[] data = new byte[size];
@@ -59,11 +59,11 @@ public class AppClient {
 					new FactoryUDT<UDPBlast>(UDPBlast.class));
 			socket.socketUDT().setOption(OptionUDT.UDT_SNDTIMEO, 60000);
 			socket.connect(new InetSocketAddress(host, port));
-			/*
-			 * final Object obj =
-			 * socket.socketUDT().getOption(OptionUDT.UDT_CC); final UDPBlast
-			 * objCCC = (UDPBlast) obj; objCCC.setRate((int) maxBW);
-			 */
+
+			final Object obj = socket.socketUDT().getOption(OptionUDT.UDT_CC);
+			final UDPBlast objCCC = (UDPBlast) obj;
+			objCCC.setRate((int) maxBW);
+
 			System.out.println("Connected");
 			final OutputStream os = socket.getOutputStream();
 
@@ -77,7 +77,7 @@ public class AppClient {
 			 */
 			final File f = new File(sourceFile);
 			final FileInputStream is = new FileInputStream(f);
-			// time();
+			time();
 			os.write((targetFile + "\n" + f.length() + "\n").getBytes("UTF-8"));
 			System.out.println("DONE WITH COPY!!");
 			// Thread.sleep(220 * 1000);
@@ -153,7 +153,7 @@ public class AppClient {
 				final long cur = System.currentTimeMillis();
 				final long secs = (cur - start) / 1000;
 				System.out.println("TRANSFERRED: " + count / 1024 + " SPEED: "
-						+ (count / 1024) / secs + "KB/s");
+						+ (count / (1024 * 1024)) / secs + "MB/s");
 				System.out.println(
 						"Thread name " + Thread.currentThread().getId());
 			}

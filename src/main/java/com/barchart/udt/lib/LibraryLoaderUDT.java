@@ -97,7 +97,7 @@ public class LibraryLoaderUDT implements LibraryLoader {
 		} else {
 			for (final String sourcePath : sourceList) {
 				final String targetPath = targetFolder + sourcePath;
-				ResourceManagerUDT.systemLoadFromJar(targetPath);
+				ResourceManagerUDT.systemLoad(targetPath);
 			}
 		}
 	}

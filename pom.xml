@@ -203,7 +203,7 @@
 
                             <archive>
                                 <manifest>
-                                    <mainClass>com.barchart.udt.AppServer</mainClass>
+                                    <mainClass>com.file.transfer.udt.main.MultipleServer</mainClass>
                                 </manifest>
                             </archive>
                         </configuration>
